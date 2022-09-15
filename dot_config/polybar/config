@@ -39,7 +39,9 @@ format-offset =
 
 [colors]
 ; Nord theme ============
-background = #2F343F
+;background = #2F343F
+background = #000000
+;background = #141414
 foreground = #f3f4f5
 foreground-active = #6790EB
 occupied = #cccccc
@@ -393,7 +395,7 @@ modules-right = filesystem
 monitor = ${env:MONITOR}
 ;monitor-fallback = HDMI1
 width = 100%
-height = 30
+height = 35
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -421,16 +423,16 @@ border-size = 0
 ;border-bottom-size = 25
 border-color = #00000000
 
-padding-left = 0
+padding-left = 1
 padding-right = 1
 
 module-margin-left = 3
 module-margin-right = 3
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = "Noto Sans:size=10;0"
-font-1 = "FontAwesome:size=13;0"
-font-2 = "Noto Sans:size=10;0"
+font-0 = "Noto Sans:size=14;0"
+font-1 = "FontAwesome:size=18;0"
+font-2 = "Noto Sans:size=14;0"
 font-3 = "Noto Sans Mono:size=10;0"
 
 modules-left = bspwm xwindow
@@ -513,7 +515,7 @@ modules-right = filesystem
 ;tray-position = right
 ;tray-background = ${colors.background}
 
-scroll-up = bspwm-desknext
+scroll-up = bsclick-left = ~/.config/polybar/scripts/pavolume.sh --togmutepwm-desknext
 scroll-down = bspwm-deskprev
 
 
@@ -1774,20 +1776,20 @@ format = <label-state> <label-mode>
 label-focused = %icon%
 label-focused-background = ${colors.background}
 label-focused-underline= #6790eb
-label-focused-padding = 4
+label-focused-padding = 1
 label-focused-foreground = #6790EB
 
 label-occupied = %icon%
-label-occupied-padding = 2
+label-occupied-padding = 1
 label-occupied-background = ${colors.background}
 label-occupied-foreground = #6790EB
 
 label-urgent = %icon%
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 label-empty = %icon%
 label-empty-foreground = ${colors.foreground}
-label-empty-padding = 2
+label-empty-padding = 1
 label-empty-background = ${colors.background}
 label-monocle = "  "
 label-monocle-foreground = ${colors.foreground}

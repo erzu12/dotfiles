@@ -8,7 +8,6 @@ capvol='no'
 maxvol='200'
 autosync='yes'
 
-isMuted='0'
 # Muted status
 # yes: muted
 # no : not muted
@@ -97,11 +96,11 @@ function volMute {
     if [ "$isMute" == "Mute: no" ];
     then
         pactl set-sink-mute $(pactl get-default-sink) 1
-        ${isMuted}=1
+        echo $isMuted
 
     else
         pactl set-sink-mute $(pactl get-default-sink) 0
-        ${isMuted}=0
+        echo $isMuted
         getCurVol
     fi
 
@@ -150,13 +149,14 @@ function output() {
     reloadSink
     getCurVol
     volMuteStatus
-    echo $isMuted
-    #if $isMuted
-    #then
-        #echo " muted"
-    #else
-        #echo " $curVol"
-    #fi
+    #echo $isMuted
+    isMute=$(pactl get-sink-mute $(pactl get-default-sink))
+    if [ "$isMute" == "Mute: no" ];
+    then
+        echo "   Muted"
+    else
+        echo " $curVol"
+    fi
 } #}}}
 
 reloadSink

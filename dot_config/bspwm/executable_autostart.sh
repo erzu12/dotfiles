@@ -29,8 +29,9 @@ fi
 
 #Some ways to set your wallpaper besides variety or nitrogen
 #feh --bg-scale ~/.config/bspwm/wall.png &
-feh --bg-fill /usr/share/backgrounds/archlinux/arch-wallpaper.jpg &
-feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
+#feh --bg-fill /usr/share/backgrounds/archlinux-login-backgrounds/att-plain-04.png
+feh --bg-fill /usr/share/backgrounds/arcolinux/black/black.jpg
+#feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
 #wallpaper for other Arch based systems
 #feh --bg-fill /usr/share/archlinux-tweak-tool/data/wallpaper/wallpaper.png &
 #feh --randomize --bg-fill ~/Dropbox/Apps/Desktoppr/*
@@ -44,7 +45,7 @@ run pamac-tray &
 run xfce4-power-manager &
 numlockx on &
 blueberry-tray &
-picom --experimental-backends --backend glx --xrender-sync-fence --config $HOME/.config/bspwm/picom.conf &
+#picom --experimental-backends --backend glx --xrender-sync-fence --config $HOME/.config/bspwm/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run volumeicon &
