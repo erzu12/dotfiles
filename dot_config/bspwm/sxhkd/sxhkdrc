@@ -163,7 +163,7 @@ ctrl + alt + b
 
 #Catfish
 ctrl + alt + c
-     catfish
+     alacritty --class cal -e calcurse
 
 #Chromium
 ctrl + alt + g

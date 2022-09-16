@@ -151,7 +151,7 @@ function output() {
     volMuteStatus
     #echo $isMuted
     isMute=$(pactl get-sink-mute $(pactl get-default-sink))
-    if [ "$isMute" == "Mute: no" ];
+    if [ "$isMute" == "Mute: yes" ];
     then
         echo "   Muted"
     else
