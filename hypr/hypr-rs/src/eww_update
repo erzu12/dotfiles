@@ -1,0 +1,2 @@
+#!/bin/bash
+eww -c /home/jonas/.config/eww/bar update workspace_literal="(box (workspace :name \"1\" :active true))" 
