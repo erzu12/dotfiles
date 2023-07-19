@@ -1,0 +1,2 @@
+--local map = require("utils").map
+--map("n", "<F4>", ":ClangdSwitchSourceHeader<CR>");
