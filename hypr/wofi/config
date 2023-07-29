@@ -6,7 +6,7 @@ prompt=Apps
 normal_window=true
 layer=top
 term=kitty
-columns=2
+columns=1
 
 ## Geometry
 width=700px

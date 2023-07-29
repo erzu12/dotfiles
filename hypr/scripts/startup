@@ -15,7 +15,7 @@ for _prs in "${_ps[@]}"; do
 done
 
 # Launch event listener (hypr-rs)
-$HOME/.config/hypr/hypr-rs/target/release/hypr-rs event &
+daemonize -o /tmp/hypr/daemon.out $HOME/.config/hypr/hypr-rs/target/release/hypr-rs server &
 
 # Apply themes
 ${SCRIPTSDIR}/gtkthemes &

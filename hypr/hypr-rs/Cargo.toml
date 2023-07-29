@@ -8,3 +8,10 @@ edition = "2021"
 [dependencies]
 hyprland = "*"
 tokio = "*"
+serde = "*"
+serde_json = "*"
+fs2 = "*"
+daemonize = "*"
+zbus = "*"
+
+
