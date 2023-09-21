@@ -86,8 +86,17 @@ impl DomainManager {
             .collect::<Vec<i32>>()
     }
 
+    pub fn get_active_workspaces_for_domain(&self, domain: String) -> Vec<i32> {
+        let domain_id = self.domains.iter().position(|d| d.name == domain).unwrap();
+        self.domains[domain_id].active_workspaces.clone()
+
+    }
+
     pub fn get_domain_names(&self) -> Vec<String> {
-        self.domains.iter().map(|d| d.name.clone()).collect::<Vec<String>>()
+        let mut names = self.domains.iter().map(|d| d.name.clone()).collect::<Vec<String>>();
+        let current_domain_name = names[self.current_domain].clone();
+        names.push(current_domain_name);
+        names
     }
 }
 

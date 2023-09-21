@@ -1,15 +1,13 @@
 #!/bin/bash
 
 CONFIG=${HOME}/.config
-EWW=${CONFIG}/eww
-NVIM=${CONFIG}/nvim
-HYPR=${CONFIG}/hypr
 
 # arr of dirs
 DIRS=(
     ${CONFIG}/eww
     ${CONFIG}/nvim
     ${CONFIG}/hypr
+    ${CONFIG}/kitty
 )
 
 

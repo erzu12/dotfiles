@@ -19,8 +19,9 @@ enum HyprEvent {
     CreateDomain(String),
     SwitchDomainByName(String),
     AddWorkspaceToDomain(i32),
-    SwitchWorkspace(i32),
+    SwitchWorkspace(String),
     SendToWorkspace(i32),
+    SendToDomain(String),
     GetDomainNames,
 }
 
@@ -40,12 +41,14 @@ impl Server {
     fn add_workspace_to_domain(&mut self, workspace: i32) {
         self.tx.send(HyprEvent::AddWorkspaceToDomain(workspace)).unwrap();
     }
-    fn switch_worckspace(&self, workspace: i32) {
+    fn switch_worckspace(&self, workspace: String) {
         self.tx.send(HyprEvent::SwitchWorkspace(workspace)).unwrap();
     }
-
     fn send_to_workspace(&self, workspace: i32) {
         self.tx.send(HyprEvent::SendToWorkspace(workspace)).unwrap();
+    }
+    fn send_to_domain(&self, name: String) {
+        self.tx.send(HyprEvent::SendToDomain(name)).unwrap();
     }
     async fn get_domain_names(&mut self) -> Vec<String> {
         self.tx.send(HyprEvent::GetDomainNames).unwrap();
@@ -116,6 +119,12 @@ pub async fn start_server() -> Result<(), Box<dyn Error>> {
             },
             HyprEvent::SendToWorkspace(workspace) => {
                 send_to_workspace(workspace, &mut dm).unwrap();
+                update_workspace_names().unwrap();
+                update_eww(&dm);
+            },
+            HyprEvent::SendToDomain(name) => {
+                send_to_domain(name.clone(), &mut dm).unwrap();
+                dm.switch_domain_by_name(name);
                 update_workspace_names().unwrap();
                 update_eww(&dm);
             },

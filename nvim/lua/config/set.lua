@@ -1,5 +1,6 @@
 --vim.opt.guicursor = ""
 
+
 vim.opt.nu = true
 
 -- disable netrw at the very start of your init.lua (strongly advised)

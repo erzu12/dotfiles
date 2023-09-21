@@ -109,10 +109,6 @@ require('lspconfig').gdscript.setup({
     end
 })
 
-require'lspconfig'.asm_lsp.setup{
-    filetypes = {
-        "asm", "s", "S"
-    }
-}
+require'lspconfig'.asm_lsp.setup{}
 
 lsp.setup()

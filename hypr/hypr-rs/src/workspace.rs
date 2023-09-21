@@ -1,12 +1,22 @@
-use hyprland::data::{Clients, Monitor, Workspace, Workspaces};
+use hyprland::data::{Clients, Monitor, Workspace, Workspaces, Client};
 use hyprland::dispatch::*;
 use hyprland::prelude::*;
 
 use crate::domain::DomainManager;
 
-pub fn switch_worckspace(workspace: i32, dm: &mut DomainManager) -> hyprland::Result<()> {
+pub fn switch_worckspace(workspace: String, dm: &mut DomainManager) -> hyprland::Result<()> {
+    let workspace_id;
+    if workspace == "--next" || workspace == "--prev" {
+        if workspace == "--next" {
+            workspace_id = get_relative_workspace_id(dm, 1);
+        } else {
+            workspace_id = get_relative_workspace_id(dm, -1);
+        }
+    } else {
+        workspace_id = get_workspace_id(workspace.parse().unwrap_or(1), 0, dm);
+    }
 
-    if let Some(workspace_id) = get_workspace_id(workspace, 0, dm) {
+    if let Some(workspace_id) = workspace_id {
         println!("workspace_id: {}", workspace_id);
         hyprland::dispatch!(Workspace, WorkspaceIdentifierWithSpecial::Id(workspace_id))?;
     }
@@ -16,6 +26,18 @@ pub fn switch_worckspace(workspace: i32, dm: &mut DomainManager) -> hyprland::Re
 pub fn send_to_workspace(workspace: i32, dm: &mut DomainManager) -> hyprland::Result<()> {
     if let Some(workspace_id) = get_workspace_id(workspace, 1, dm) {
         hyprland::dispatch!(MoveToWorkspace, WorkspaceIdentifierWithSpecial::Id(workspace_id), None)?;
+    }
+    hyprland::Result::Ok(())
+}
+
+pub fn send_to_domain(domain: String, dm: &mut DomainManager) -> hyprland::Result<()> {
+    if let Some(client) = Client::get_active().unwrap() {
+        dm.switch_domain_by_name(domain);
+        let workspace_id = Workspace::get_active().unwrap().id;
+
+        hyprland::dispatch!(MoveToWorkspace,
+            WorkspaceIdentifierWithSpecial::Id(workspace_id), 
+            Some(WindowIdentifier::Address(client.address)))?;
     }
     hyprland::Result::Ok(())
 }
@@ -77,4 +99,22 @@ fn get_workspace_id(workspace: i32, min_win: u16, dm: &mut DomainManager) -> Opt
     }
 
     Some(workspace_id)
+}
+
+fn get_relative_workspace_id(dm: &mut DomainManager, offset: i32) -> Option<i32> {
+    let domain_workspace = &dm.domains[dm.current_domain].workspaces;
+    let mon = Monitor::get_active().unwrap();
+    let active_workspace = Workspace::get_active().unwrap();
+
+    let workspaces = Workspaces::get().unwrap().to_vec();
+    let workspaces = workspaces.iter()
+        .filter(|w| domain_workspace.contains(&w.id))
+        .filter(|e| e.monitor == mon.name);
+
+    let current_id = workspaces.clone().position(|e| e.id == active_workspace.id)
+        .unwrap_or(0) as i32;
+
+    let workspace_count = workspaces.count() as i32;
+
+    get_workspace_id((current_id + offset + workspace_count) % workspace_count + 1, 0, dm)
 }

@@ -1,4 +1,4 @@
 require("mason").setup()
 require("mason-nvim-dap").setup({
-     automatic_setup = true,
- })
+    automatic_setup = true,
+})

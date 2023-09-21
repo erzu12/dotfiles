@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
     use('github/copilot.vim')
     use{'stevearc/oil.nvim', config = function() require('oil').setup() end}
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    use('RRethy/nvim-treesitter-textsubjects')
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
     use('preservim/nerdtree')
@@ -35,9 +36,10 @@ return require('packer').startup(function(use)
     use('lervag/vimtex')
     use('mfussenegger/nvim-dap')
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-    use('jayp0521/mason-nvim-dap.nvim')
+    use('jay-babu/mason-nvim-dap.nvim')
     use('ahmedkhalf/project.nvim')
     use('simrat39/symbols-outline.nvim')
+    -- use('christoomey/vim-tmux-navigator')
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
