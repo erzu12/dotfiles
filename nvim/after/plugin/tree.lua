@@ -15,6 +15,6 @@ require("nvim-tree").setup({
     }
 })
 
-vim.keymap.set('n', ';', function()
-    require("nvim-tree.api").tree.toggle()
-end)
+--vim.keymap.set('n', ';', function()
+    --require("nvim-tree.api").tree.toggle()
+--end)

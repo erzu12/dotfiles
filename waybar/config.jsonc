@@ -1,0 +1,15 @@
+[{
+    "output": "DP-1",
+    "modules-center": [
+        "mpris"
+    ],
+    "include": [
+        "~/.config/waybar/default-modules.json"
+    ]
+},
+{
+    "output": "!DP-1",
+    "include": [
+        "~/.config/waybar/default-modules.json"
+    ]
+}]

@@ -4,7 +4,6 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
     'tsserver',
-    'eslint',
     'rust_analyzer',
 })
 
@@ -114,5 +113,61 @@ require'lspconfig'.asm_lsp.setup{
         "asm", "s", "S"
     }
 }
+
+local function get_current_dir_name()
+    local current_dir = vim.fn.getcwd()
+    local current_dir_name = current_dir:match("^.+/(.+)$")
+    return current_dir_name
+end
+
+if vim.g.lsp_test == 1 then
+    print('starting ls in test mode')
+    require('lspconfig').clangd.setup({
+        cmd = { "python", "/media/ssd2/dev/HSLU/BAA/ls/lswrap.py", "clangd" },
+        -- cmd = { "clangd", "--offset-encoding=utf-16" },
+        filetypes = { "c", "cpp", "cxx", "objc", "objcpp" },
+    })
+
+    require('lspconfig').jdtls.setup({
+        cmd = { "jdtls", "-configuration", "/home/jonas/.cache/jdtls/config", "-data", "/home/jonas/.cache/jdtls/workspace" },
+        filetypes = { "nonekdjasklj" },
+    })
+
+    require('lspconfig').tsserver.setup({
+        cmd = { "python", "/media/ssd2/dev/HSLU/BAA/ls/lswrap.py", "typescript-language-server", "--stdio" },
+    })
+
+    require('lspconfig').pyright.setup({
+        cmd = { "python", "/media/ssd2/dev/HSLU/BAA/ls/lswrap.py", "pyright-langserver", "--stdio" },
+    })
+
+    require('lspconfig').html.setup({
+        cmd = { "python", "/media/ssd2/dev/HSLU/BAA/ls/lswrap.py", "vscode-html-language-server", "--stdio" }
+    })
+else
+    require('sonarlint').setup({
+       server = {
+          cmd = {
+             'sonarlint-language-server',
+             -- Ensure that sonarlint-language-server uses stdio channel
+             '-stdio',
+             '-analyzers',
+             -- paths to the analyzers you need, using those for python and java in this example
+             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
+             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
+             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
+             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjs.jar"),
+          }
+       },
+       filetypes = {
+          -- Tested and working
+          'python',
+          'cpp',
+          'java',
+          'typescript',
+       }
+    })
+
+end
 
 lsp.setup()

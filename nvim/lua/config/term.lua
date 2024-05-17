@@ -41,7 +41,7 @@ function SetCWD()
     --vim.cmd('cd' .. vim.g.root)
 end
 
-vim.keymap.set("n", "T", function() OpenTerminal() end)
+--vim.keymap.set("n", "T", function() OpenTerminal() end)
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>:lua NewTerminal()<CR>")
 vim.keymap.set("t", "<C-j>", "<C-\\><C-n>:lua SwitchTerminal(false)<CR>" )
 vim.keymap.set("t", "<C-k>", "<C-\\><C-n>:lua SwitchTerminal(true)<CR>" )

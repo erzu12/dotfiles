@@ -1,4 +1,4 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+-- This file can be loaded by calling `lua require('plugins')` from your init.vimpack
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
@@ -8,9 +8,13 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
+    }
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     }
 
     --use({
@@ -21,7 +25,7 @@ return require('packer').startup(function(use)
     --    end
     --})
 
-    use('github/copilot.vim')
+    use{'zbirenbaum/copilot.lua'}
     use{'stevearc/oil.nvim', config = function() require('oil').setup() end}
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('RRethy/nvim-treesitter-textsubjects')
@@ -34,12 +38,13 @@ return require('packer').startup(function(use)
     use('windwp/nvim-autopairs')
     use('tpope/vim-surround')
     use('lervag/vimtex')
+    use {'kaarmu/typst.vim', ft = {'typst'}}
     use('mfussenegger/nvim-dap')
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
     use('jay-babu/mason-nvim-dap.nvim')
     use('ahmedkhalf/project.nvim')
     use('simrat39/symbols-outline.nvim')
-    -- use('christoomey/vim-tmux-navigator')
+    use('christoomey/vim-tmux-navigator')
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
@@ -62,8 +67,10 @@ return require('packer').startup(function(use)
         requires = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
+            { 'mfussenegger/nvim-jdtls' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
+            { 'https://gitlab.com/schrieveslaach/sonarlint.nvim' },
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },

@@ -1,6 +1,6 @@
 require 'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
-    ensure_installed = {"java", "javascript", "typescript", "c", "cpp", "lua", "rust" },
+    ensure_installed = {"java", "typescript", "c", "cpp", "lua", "rust" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -42,3 +42,7 @@ require 'nvim-treesitter.configs'.setup {
 
     
 }
+
+vim.cmd [[
+ au BufRead,BufNewFile *.frag,*.vert set filetype=glsl
+]]

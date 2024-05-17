@@ -31,3 +31,13 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
+
+vim.g.auto_zoom = true
+
+vim.api.nvim_create_autocmd("FocusGained", {
+ callback = function()
+     if vim.g.auto_zoom then
+         os.execute("if ! tmux list-panes -F '#F' | grep -q 'Z' ; then tmux resize-pane -Z; fi")
+     end
+ end,
+})

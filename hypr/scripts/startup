@@ -25,10 +25,13 @@ ${SCRIPTSDIR}/notifications &
 
 # Lauch statusbar (waybar)
 # ${SCRIPTSDIR}/statusbar &
-$HOME/.config/eww/bar/launch_bar &
+# $HOME/.config/eww/bar/launch_bar &
 
 # Launch nm-applet
 nm-applet &
+
+# Launc hypridle
+hypridle &
 
 # Xauthority
 ${SCRIPTSDIR}/xauthority &

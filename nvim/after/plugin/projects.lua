@@ -1,15 +1,11 @@
 require("project_nvim").setup {
     detection_methods = {"lsp", "pattern" },
-    patterns = {".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json"},
-    ignore_lsp = {"sumneko_lua"},
+    patterns = {".git", ".svn", "Makefile", "package.json", "run.sh", "cargo.toml"},
+    ignore_lsp = {"lua_ls"},
 }
 
 require('telescope').load_extension('projects')
 vim.keymap.set('n', '<C-p>', ":Telescope projects<CR>", {})
-
-function sleep(n)
-  os.execute("sleep " .. tonumber(n))
-end
 
 
 function showProject()

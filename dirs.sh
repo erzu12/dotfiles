@@ -4,7 +4,7 @@ CONFIG=${HOME}/.config
 
 # arr of dirs
 DIRS=(
-    ${CONFIG}/eww
+    ${CONFIG}/waybar
     ${CONFIG}/nvim
     ${CONFIG}/hypr
     ${CONFIG}/kitty
